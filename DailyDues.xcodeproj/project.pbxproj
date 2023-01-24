@@ -15,6 +15,10 @@
 		840608C9297F0DDF006352BF /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 840608C7297F0DDF006352BF /* Main.xcdatamodeld */; };
 		840608CC297F2509006352BF /* DailyDue-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608CB297F2509006352BF /* DailyDue-CoreDataHelpers.swift */; };
 		840608CE297F259F006352BF /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 840608CD297F259F006352BF /* Colors.xcassets */; };
+		840608D0297F537E006352BF /* DailyDueRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608CF297F537E006352BF /* DailyDueRowView.swift */; };
+		840608D2297F53C3006352BF /* DailyDueRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D1297F53C3006352BF /* DailyDueRowViewModel.swift */; };
+		840608D429802BA6006352BF /* DailyDueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D329802BA6006352BF /* DailyDueListViewModel.swift */; };
+		840608D629803213006352BF /* DailyDueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D529803213006352BF /* DailyDueListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,10 @@
 		840608C8297F0DDF006352BF /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		840608CB297F2509006352BF /* DailyDue-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyDue-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		840608CD297F259F006352BF /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = DailyDues/Colors.xcassets; sourceTree = SOURCE_ROOT; };
+		840608CF297F537E006352BF /* DailyDueRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDueRowView.swift; sourceTree = "<group>"; };
+		840608D1297F53C3006352BF /* DailyDueRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDueRowViewModel.swift; sourceTree = "<group>"; };
+		840608D329802BA6006352BF /* DailyDueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDueListViewModel.swift; sourceTree = "<group>"; };
+		840608D529803213006352BF /* DailyDueListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDueListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +74,10 @@
 				840608C3297F0AF0006352BF /* Info.plist */,
 				840608B5297F08A4006352BF /* DailyDuesApp.swift */,
 				840608B7297F08A4006352BF /* ContentView.swift */,
+				840608D529803213006352BF /* DailyDueListView.swift */,
+				840608D329802BA6006352BF /* DailyDueListViewModel.swift */,
+				840608CF297F537E006352BF /* DailyDueRowView.swift */,
+				840608D1297F53C3006352BF /* DailyDueRowViewModel.swift */,
 				840608C5297F0BB5006352BF /* DataController.swift */,
 				840608C7297F0DDF006352BF /* Main.xcdatamodeld */,
 				840608B9297F08A5006352BF /* Assets.xcassets */,
@@ -162,11 +174,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840608D629803213006352BF /* DailyDueListView.swift in Sources */,
+				840608D429802BA6006352BF /* DailyDueListViewModel.swift in Sources */,
+				840608D0297F537E006352BF /* DailyDueRowView.swift in Sources */,
 				840608CC297F2509006352BF /* DailyDue-CoreDataHelpers.swift in Sources */,
 				840608B8297F08A4006352BF /* ContentView.swift in Sources */,
 				840608C6297F0BB5006352BF /* DataController.swift in Sources */,
 				840608C9297F0DDF006352BF /* Main.xcdatamodeld in Sources */,
 				840608B6297F08A4006352BF /* DailyDuesApp.swift in Sources */,
+				840608D2297F53C3006352BF /* DailyDueRowViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

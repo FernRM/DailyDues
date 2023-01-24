@@ -36,6 +36,10 @@ extension DailyDue {
         color ?? "Light Blue"
     }
 
+    var dailyDueIcon: String {
+        icon ?? "circle"
+    }
+
     var dailyDueCompletionAmount: Double {
         return Double(repetitionsCompleted) / Double(repetitionsPerDay)
     }

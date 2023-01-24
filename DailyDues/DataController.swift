@@ -66,7 +66,6 @@ class DataController: ObservableObject {
         for dailyDuesCount in 1...7 {
             let dailyDue = DailyDue(context: viewContext)
             dailyDue.title = "Due numero \(dailyDuesCount)"
-            dailyDue.color = "" // TODO: update with a color once those have been added
             dailyDue.creationDate = Date()
             dailyDue.isAMandPM = Bool.random()
 
