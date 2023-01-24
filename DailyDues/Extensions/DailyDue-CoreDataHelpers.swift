@@ -24,6 +24,27 @@ extension DailyDue {
         "Pink"
     ]
 
+    static let icons = [
+        "circle",
+        "star",
+        "moon",
+        "gamecontroller",
+        "drop",
+        "pill",
+        "heart",
+        "lightbulb",
+        "figure.run.circle",
+        "mountain.2",
+        "lizard",
+        "bird",
+        "fish",
+        "pawprint",
+        "leaf",
+        "square",
+        "oval",
+        "diamond"
+    ]
+
     var dailyDueTitle: String {
         title ?? "New Task"
     }
