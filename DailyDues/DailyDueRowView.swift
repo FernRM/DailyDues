@@ -5,9 +5,12 @@
 //  Created by Ricardo Fernandez on 1/23/23.
 //
 
+// TODO: Make ListView update correctly when updating repetitions
+
 import SwiftUI
 
 struct DailyDueRowView: View {
+    @EnvironmentObject var dataController: DataController
     @StateObject var viewModel: ViewModel
     @ObservedObject var dailyDue: DailyDue
     @State private var showingDetailView: Bool
@@ -20,7 +23,9 @@ struct DailyDueRowView: View {
             } icon: {
                 Image(systemName: viewModel.icon)
                     .onTapGesture {
-                        // TODO: Add code for updating repetitions
+                        withAnimation {
+                            viewModel.addRepetition(dailyDue: dailyDue)
+                        }
                     }
             }
 

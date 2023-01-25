@@ -34,5 +34,10 @@ extension DailyDueRowView {
             self.dailyDue = dailyDue
         }
 
+        func addRepetition(dailyDue: DailyDue) {
+            guard dailyDue.repetitionsCompleted < dailyDue.repetitionsPerDay else { return }
+            dailyDue.repetitionsCompleted += 1
+        }
+
     }
 }

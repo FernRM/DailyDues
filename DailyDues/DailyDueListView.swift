@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DailyDueListView: View {
-
+    @EnvironmentObject var dataController: DataController
     @StateObject var viewModel: ViewModel
     @State private var showingDetailView = false
 
@@ -21,6 +21,13 @@ struct DailyDueListView: View {
                 }
             }
             .navigationTitle("Daily Dues")
+            .toolbar {
+                Button {
+                    try? dataController.createSampleData()
+                } label: {
+                    Image(systemName: "plus")
+                }
+            }
         }
     }
 

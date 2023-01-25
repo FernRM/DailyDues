@@ -12,7 +12,6 @@ struct ContentView: View {
 
     @State private var showingDetailView = false
 
-    
     var body: some View {
         DailyDueListView(dataController: dataController)
     }
