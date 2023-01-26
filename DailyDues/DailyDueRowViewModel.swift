@@ -36,6 +36,7 @@ extension DailyDueRowView {
 
         func addRepetition(dailyDue: DailyDue) {
             guard dailyDue.repetitionsCompleted < dailyDue.repetitionsPerDay else { return }
+            dailyDue.objectWillChange.send()
             dailyDue.repetitionsCompleted += 1
         }
 

@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct EditDailyDueView: View {
+    @ObservedObject var dailyDue: DailyDue
+
     @EnvironmentObject var dataController: DataController
     @Environment(\.presentationMode) var presentationMode
-
-    @ObservedObject var dailyDue: DailyDue
 
     @State private var title: String
     @State private var icon: String
@@ -66,7 +66,7 @@ var body: some View {
         .onDisappear(perform: dataController.save)
         .alert(isPresented: $showingDeleteConfirm) {
             Alert(
-                title: Text("Delete Daily Due?"),
+                title: Text("Delete Daily Due"),
                 message: Text("Are you sure you want to delete this?"),
                 primaryButton: .default(Text("Delete"), action: delete),
                 secondaryButton: .cancel()
@@ -88,6 +88,7 @@ var body: some View {
         dailyDue.icon = icon
         dailyDue.color = color
         dailyDue.repetitionsPerDay = Int16(repetitionsPerDay)
+        dailyDue.repetitionsCompleted = 0
     }
 
     func delete() {

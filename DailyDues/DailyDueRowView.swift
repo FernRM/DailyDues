@@ -13,40 +13,40 @@ struct DailyDueRowView: View {
     @EnvironmentObject var dataController: DataController
     @StateObject var viewModel: ViewModel
     @ObservedObject var dailyDue: DailyDue
-    @State private var showingDetailView: Bool
+
 
     var body: some View {
-
         VStack (alignment: .leading) {
             Label {
                 Text(dailyDue.dailyDueTitle)
             } icon: {
                 Image(systemName: viewModel.icon)
-                    .onTapGesture {
-                        withAnimation {
-                            viewModel.addRepetition(dailyDue: dailyDue)
-                        }
-                    }
+                    .foregroundColor(Color(dailyDue.dailyDueColor))
             }
 
             ProgressView(value: dailyDue.dailyDueCompletionAmount)
                 .accentColor(Color(dailyDue.dailyDueColor))
         }
+        .onTapGesture {
+            withAnimation {
+                viewModel.addRepetition(dailyDue: dailyDue)
+            }
+        }
         .padding(.bottom, 10)
         .accessibilityElement(children: .combine)
     }
 
-    init(dailyDue: DailyDue, showingDetailView: Bool) {
+    init(dailyDue: DailyDue) {
         let viewModel = ViewModel(dailyDue: dailyDue)
         _viewModel = StateObject(wrappedValue: viewModel)
 
         self.dailyDue = dailyDue
-        self.showingDetailView = showingDetailView
     }
 }
 
 struct DailyDueRowView_Previews: PreviewProvider {
     static var previews: some View {
-        DailyDueRowView(dailyDue: DailyDue.example, showingDetailView: false)
+        DailyDueRowView(dailyDue: DailyDue.example)
+            .previewLayout(.fixed(width: 400, height: 80))
     }
 }

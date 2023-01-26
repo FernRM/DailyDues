@@ -17,19 +17,38 @@ struct DailyDueListView: View {
         NavigationView {
             List {
                 ForEach(viewModel.dailyDues) { dailyDue in
-                    DailyDueRowView(dailyDue: dailyDue, showingDetailView: showingDetailView)
+                    if showingDetailView {
+                        NavigationLink(destination: EditDailyDueView(dailyDue: dailyDue)) {
+                            DailyDueRowView(dailyDue: dailyDue)
+                                .disabled(true)
+                        }
+                    } else {
+                        DailyDueRowView(dailyDue: dailyDue)
+                    }
                 }
             }
             .navigationTitle("Daily Dues")
             .toolbar {
-                Button {
-                    try? dataController.createSampleData()
-                } label: {
-                    Image(systemName: "plus")
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        try? dataController.createSampleData()
+                    } label: {
+                        Image(systemName: "star")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+
+                    Button {
+                        showingDetailView.toggle()
+                        print("View toggled")
+                    } label: {
+                        Text("Edit")
+                    }
                 }
             }
+
+            }
         }
-    }
 
     init(dataController: DataController) {
         let viewModel = ViewModel(dataController: dataController)
