@@ -19,7 +19,9 @@ extension DailyDueListView {
             self.dataController = dataController
 
             let request: NSFetchRequest<DailyDue> = DailyDue.fetchRequest()
-            request.sortDescriptors = [NSSortDescriptor(keyPath: \DailyDue.title, ascending: true)]
+            let titleSortDescriptor = NSSortDescriptor(keyPath:\DailyDue.title, ascending: true)
+            let isCompletedSortDescriptor = NSSortDescriptor(keyPath:\DailyDue.isCompleted, ascending: true)
+            request.sortDescriptors = [isCompletedSortDescriptor, titleSortDescriptor]
 
             dailyDuesController = NSFetchedResultsController(
                 fetchRequest: request,
@@ -43,6 +45,16 @@ extension DailyDueListView {
             if let newDailyDues = controller.fetchedObjects as? [DailyDue] {
                 dailyDues = newDailyDues
             }
+        }
+
+        func deleteAllData() {
+            dataController.objectWillChange.send()
+            dataController.deleteAll()
+        }
+
+        func addSampleData() {
+            dataController.deleteAll()
+            try? dataController.createSampleData()
         }
     }
 }

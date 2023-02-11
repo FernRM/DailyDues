@@ -13,15 +13,15 @@ struct DailyDueRowView: View {
     @EnvironmentObject var dataController: DataController
     @StateObject var viewModel: ViewModel
     @ObservedObject var dailyDue: DailyDue
-
+    @State private var icon: String
 
     var body: some View {
         VStack (alignment: .leading) {
-            Label {
-                Text(dailyDue.dailyDueTitle)
-            } icon: {
+
+            HStack {
                 Image(systemName: viewModel.icon)
                     .foregroundColor(Color(dailyDue.dailyDueColor))
+                Text(dailyDue.dailyDueTitle)
             }
 
             ProgressView(value: dailyDue.dailyDueCompletionAmount)
@@ -32,8 +32,12 @@ struct DailyDueRowView: View {
                 viewModel.addRepetition(dailyDue: dailyDue)
             }
         }
-        .padding(.bottom, 10)
         .accessibilityElement(children: .combine)
+        .padding()
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .shadow(color: .black.opacity(0.05), radius: 5, x: 5, y: 5)
+
     }
 
     init(dailyDue: DailyDue) {
@@ -41,6 +45,7 @@ struct DailyDueRowView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
 
         self.dailyDue = dailyDue
+        self.icon = viewModel.icon
     }
 }
 

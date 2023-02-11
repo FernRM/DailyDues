@@ -41,7 +41,7 @@ var body: some View {
                         }
                     }
                 }
-            }
+            } 
 
             Section(header: Text("Color")) {
                 LazyVGrid(columns: colorColumns) {

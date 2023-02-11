@@ -15,28 +15,41 @@ struct DailyDueListView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.dailyDues) { dailyDue in
-                    if showingDetailView {
-                        NavigationLink(destination: EditDailyDueView(dailyDue: dailyDue)) {
+            ScrollView(.vertical, showsIndicators: false) {
+
+                VStack( spacing: 0) {
+                    ForEach(viewModel.dailyDues) { dailyDue in
+                        if showingDetailView {
+                            NavigationLink(destination: EditDailyDueView(dailyDue: dailyDue)) {
+                                DailyDueRowView(dailyDue: dailyDue)
+                                    .disabled(true)
+                            }
+                        } else {
                             DailyDueRowView(dailyDue: dailyDue)
-                                .disabled(true)
                         }
-                    } else {
-                        DailyDueRowView(dailyDue: dailyDue)
                     }
+                    .padding([.horizontal, .bottom], 15)
                 }
+
             }
+            .background(.regularMaterial, ignoresSafeAreaEdges: .all)
             .navigationTitle("Daily Dues")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        try? dataController.createSampleData()
+                        viewModel.deleteAllData()
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        viewModel.addSampleData()
                     } label: {
                         Image(systemName: "star")
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem(placement: .navigationBarTrailing) {
 
                     Button {
                         showingDetailView.toggle()
@@ -46,6 +59,7 @@ struct DailyDueListView: View {
                     }
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
 
             }
         }

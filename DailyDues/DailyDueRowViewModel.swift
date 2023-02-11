@@ -13,7 +13,7 @@ extension DailyDueRowView {
 
         // return correct icon string based on completion status
         var icon: String {
-            if dailyDue.isCompleted {
+            if dailyDue.dailyDueIsCompleted {
                 return "\(dailyDue.dailyDueIcon).fill"
             } else {
                 return dailyDue.dailyDueIcon
@@ -21,7 +21,7 @@ extension DailyDueRowView {
         }
 
         var label: String {
-            if dailyDue.isCompleted {
+            if dailyDue.dailyDueIsCompleted {
                 return "\(dailyDue.dailyDueTitle), completed"
             } else if dailyDue.repetitionsPerDay > 1 {
                 return "\(dailyDue.dailyDueTitle) has been completed \(dailyDue.repetitionsCompleted) out of \(dailyDue.repetitionsPerDay) times"

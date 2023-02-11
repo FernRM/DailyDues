@@ -45,6 +45,16 @@ extension DailyDue {
         "diamond"
     ]
 
+    var dailyDueIsCompleted: Bool {
+        if repetitionsCompleted == repetitionsPerDay {
+            isCompleted = true
+            return true
+        } else {
+            isCompleted = false
+            return false
+        }
+    }
+
     var dailyDueTitle: String {
         title ?? "New Task"
     }
