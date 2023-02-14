@@ -16,26 +16,33 @@ struct DailyDueRowView: View {
     @State private var icon: String
 
     var body: some View {
-        VStack (alignment: .leading) {
 
-            HStack {
-                Image(systemName: viewModel.icon)
-                    .foregroundColor(Color(dailyDue.dailyDueColor))
-                Text(dailyDue.dailyDueTitle)
-            }
+            VStack (alignment: .leading) {
 
-            ProgressView(value: dailyDue.dailyDueCompletionAmount)
-                .accentColor(Color(dailyDue.dailyDueColor))
-        }
-        .onTapGesture {
-            withAnimation {
-                viewModel.addRepetition(dailyDue: dailyDue)
+                HStack {
+//                    Image(systemName: viewModel.icon)
+//                    CircularProgressView(dailyDue: dailyDue)
+
+                    Text(dailyDue.dailyDueTitle)
+                        .font(.title2)
+                        .fontWeight(.medium)
+                    Spacer()
+                    Text("\(dailyDue.repetitionsCompleted) / \(dailyDue.repetitionsPerDay)")
+                        .font(.body)
+                }
+
+                ProgressView(value: dailyDue.dailyDueCompletionAmount)
+                    .accentColor(Color(dailyDue.dailyDueColor))
             }
-        }
-        .accessibilityElement(children: .combine)
-        .padding()
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .onTapGesture {
+                withAnimation {
+                    viewModel.addRepetition(dailyDue: dailyDue)
+                }
+            }
+            .accessibilityElement(children: .combine)
+            .padding()
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
         .shadow(color: .black.opacity(0.05), radius: 5, x: 5, y: 5)
 
     }
