@@ -10,7 +10,7 @@ import SwiftUI
 struct DailyDueListView: View {
     @EnvironmentObject var dataController: DataController
     @StateObject var viewModel: ViewModel
-    @State private var showingDetailView = false
+    @State public var showingDetailView = false
 
 
     var body: some View {
@@ -19,14 +19,7 @@ struct DailyDueListView: View {
 
                 VStack( spacing: 0) {
                     ForEach(viewModel.dailyDues) { dailyDue in
-                        if showingDetailView {
-                            NavigationLink(destination: EditDailyDueView(dailyDue: dailyDue)) {
-                                DailyDueRowView(dailyDue: dailyDue)
-                                    .disabled(true)
-                            }
-                        } else {
-                            DailyDueRowView(dailyDue: dailyDue)
-                        }
+                        DailyDueRowView(dailyDue: dailyDue, showDetailView: showingDetailView)
                     }
                     .padding([.horizontal, .bottom], 15)
                 }
@@ -52,7 +45,9 @@ struct DailyDueListView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
 
                     Button {
-                        showingDetailView.toggle()
+                        withAnimation {
+                            showingDetailView.toggle()
+                        }
                         print("View toggled")
                     } label: {
                         Text("Edit")
