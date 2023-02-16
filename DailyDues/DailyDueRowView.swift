@@ -33,6 +33,7 @@ struct DailyDueRowView: View {
 
                 ProgressView(value: dailyDue.dailyDueCompletionAmount)
                     .accentColor(Color(dailyDue.dailyDueColor))
+                    .background(Color(dailyDue.dailyDueColor).opacity(0.2))
             }
             .onTapGesture {
                 withAnimation {

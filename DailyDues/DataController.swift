@@ -7,6 +7,7 @@
 
 import CoreData
 import SwiftUI
+import UserNotifications
 
 class DataController: ObservableObject {
     let container: NSPersistentCloudKitContainer
@@ -114,4 +115,65 @@ class DataController: ObservableObject {
         (try? container.viewContext.count(for: fetchRequest)) ?? 0
     }
 
+    func addReminders(for dailyDue: DailyDue, completion: @escaping (Bool) -> Void) {
+        let center = UNUserNotificationCenter.current()
+
+        center.getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                self.requestNotifications { success in
+                    if success {
+                        self.placeReminders(for: dailyDue, completion: completion)
+                    } else {
+                        DispatchQueue.main.async {
+                            completion(false)
+                        }
+                    }
+                }
+            case .authorized:
+                self.placeReminders(for: dailyDue, completion: completion)
+            default:
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+            }
+        }
+    }
+
+    func removeReminders(for dailyDue: DailyDue) {
+        let center = UNUserNotificationCenter.current()
+        let id = dailyDue.objectID.uriRepresentation().absoluteString
+
+        center.removePendingNotificationRequests(withIdentifiers: [id])
+    }
+
+    private func requestNotifications(completion: @escaping (Bool) -> Void) {
+        let center = UNUserNotificationCenter.current()
+
+        center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
+            completion(granted)
+        }
+    }
+    // only used when we know it's good to place reminders (after approval and checking notification access)
+    private func placeReminders(for dailyDue: DailyDue, completion: @escaping (Bool) -> Void) {
+        let content = UNMutableNotificationContent()
+        content.title = dailyDue.dailyDueTitle
+        content.sound = .default
+
+        let components = Calendar.current.dateComponents([.hour, .minute], from: dailyDue.reminderTime ?? Date())
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+
+        let id = dailyDue.objectID.uriRepresentation().absoluteString
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+
+        UNUserNotificationCenter.current().add(request) { error in
+            DispatchQueue.main.async {
+                if error == nil {
+                    completion(true)
+                } else {
+                    completion(false)
+                }
+            }
+        }
+    }
 }

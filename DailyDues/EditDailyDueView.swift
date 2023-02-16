@@ -18,6 +18,10 @@ struct EditDailyDueView: View {
     @State private var color: String
     @State private var repetitionsPerDay: Int
     @State private var showingDeleteConfirm = false
+    @State private var showingNotificationsError = false
+
+    @State private var remindMe: Bool
+    @State private var reminderTime: Date
 
     let colorColumns = [
         GridItem(.adaptive(minimum: 44))
@@ -27,7 +31,26 @@ struct EditDailyDueView: View {
         GridItem(.adaptive(minimum: 44))
     ]
 
-var body: some View {
+    init(dailyDue: DailyDue) {
+        self.dailyDue = dailyDue
+
+        _title = State(wrappedValue: dailyDue.dailyDueTitle)
+        _icon = State(wrappedValue: dailyDue.dailyDueIcon)
+        _color = State(wrappedValue: dailyDue.dailyDueColor)
+        _repetitionsPerDay = State(wrappedValue: Int(dailyDue.repetitionsPerDay))
+
+        if let dailyDueReminderTime = dailyDue.reminderTime {
+            _reminderTime = State(wrappedValue: dailyDueReminderTime)
+            _remindMe = State(wrappedValue: true)
+        } else {
+            _reminderTime = State(wrappedValue: Date())
+            _remindMe = State(wrappedValue: false)
+        }
+
+    }
+
+    var body: some View {
+
         Form {
             Section(header: Text("Title")) {
                 TextField("Title", text: $title.onChange(update))
@@ -49,6 +72,25 @@ var body: some View {
                 }
             }
 
+            Section(header: Text("Daily Due Reminder")) {
+                Toggle("Show reminders", isOn: $remindMe.animation().onChange(update))
+                    .alert(isPresented: $showingNotificationsError) {
+                        Alert(
+                            title: Text("Ope!"),
+                            message: Text("There was a problem! Please check if you have notifications enabled."),
+                            primaryButton: .default(Text("Check Settings"), action: showAppSettings),
+                            secondaryButton: .cancel()
+                        )
+                    }
+
+                if remindMe {
+                    DatePicker(
+                        "Reminder time",
+                        selection: $reminderTime.onChange(update),
+                        displayedComponents: .hourAndMinute)
+                }
+            }
+
             Section(header: Text("Icon")) {
                 LazyVGrid(columns: iconColumns) {
                     ForEach(DailyDue.icons, id: \.self, content: iconButton)
@@ -61,26 +103,19 @@ var body: some View {
                 dataController.delete(dailyDue)
             }
             .accentColor(.red)
+            .alert(isPresented: $showingDeleteConfirm) {
+                Alert(
+                    title: Text("Delete Daily Due"),
+                    message: Text("Are you sure you want to delete this?"),
+                    primaryButton: .default(Text("Delete"), action: delete),
+                    secondaryButton: .cancel()
+                )
+            }
+
         }
         .navigationTitle("Details")
         .onDisappear(perform: dataController.save)
-        .alert(isPresented: $showingDeleteConfirm) {
-            Alert(
-                title: Text("Delete Daily Due"),
-                message: Text("Are you sure you want to delete this?"),
-                primaryButton: .default(Text("Delete"), action: delete),
-                secondaryButton: .cancel()
-            )
-        }
-    }
 
-    init(dailyDue: DailyDue) {
-        self.dailyDue = dailyDue
-
-        _title = State(wrappedValue: dailyDue.dailyDueTitle)
-        _icon = State(wrappedValue: dailyDue.dailyDueIcon)
-        _color = State(wrappedValue: dailyDue.dailyDueColor)
-        _repetitionsPerDay = State(wrappedValue: Int(dailyDue.repetitionsPerDay))
     }
 
     func update() {
@@ -89,6 +124,23 @@ var body: some View {
         dailyDue.color = color
         dailyDue.repetitionsPerDay = Int16(repetitionsPerDay)
         dailyDue.repetitionsCompleted = 0
+
+        if remindMe {
+            dailyDue.reminderTime = reminderTime
+
+            dataController.addReminders(for: dailyDue) { success in
+                if success == false {
+                    showingNotificationsError = true
+                    dailyDue.reminderTime = nil
+                    remindMe = false
+
+
+                }
+            }
+        } else {
+            dailyDue.reminderTime = nil
+            dataController.removeReminders(for: dailyDue)
+        }
     }
 
     func delete() {
@@ -133,6 +185,16 @@ var body: some View {
             item == icon ? [.isButton, .isSelected] : .isButton
         )
         .accessibilityLabel(LocalizedStringKey(item))
+    }
+
+    func showAppSettings() {
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+
+        if UIApplication.shared.canOpenURL(settingsURL) {
+            UIApplication.shared.open(settingsURL)
+        }
     }
 }
 
