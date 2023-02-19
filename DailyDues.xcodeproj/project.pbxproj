@@ -21,6 +21,7 @@
 		840608D629803213006352BF /* DailyDueListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D529803213006352BF /* DailyDueListView.swift */; };
 		840608D8298089D3006352BF /* EditDailyDueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D7298089D3006352BF /* EditDailyDueView.swift */; };
 		840608DA298093BE006352BF /* Binding-OnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D9298093BE006352BF /* Binding-OnChange.swift */; };
+		848CA0BB299FF252001DFEB8 /* AddDailyDueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CA0BA299FF252001DFEB8 /* AddDailyDueView.swift */; };
 		84CBF736299AFAF300CA8F20 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CBF735299AFAF300CA8F20 /* CircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		840608D529803213006352BF /* DailyDueListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDueListView.swift; sourceTree = "<group>"; };
 		840608D7298089D3006352BF /* EditDailyDueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDailyDueView.swift; sourceTree = "<group>"; };
 		840608D9298093BE006352BF /* Binding-OnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding-OnChange.swift"; sourceTree = "<group>"; };
+		848CA0BA299FF252001DFEB8 /* AddDailyDueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyDueView.swift; sourceTree = "<group>"; };
 		84CBF735299AFAF300CA8F20 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 				840608C3297F0AF0006352BF /* Info.plist */,
 				840608B5297F08A4006352BF /* DailyDuesApp.swift */,
 				840608B7297F08A4006352BF /* ContentView.swift */,
+				848CA0BA299FF252001DFEB8 /* AddDailyDueView.swift */,
 				840608D7298089D3006352BF /* EditDailyDueView.swift */,
 				840608D529803213006352BF /* DailyDueListView.swift */,
 				840608D329802BA6006352BF /* DailyDueListViewModel.swift */,
@@ -193,6 +196,7 @@
 				840608C9297F0DDF006352BF /* Main.xcdatamodeld in Sources */,
 				840608B6297F08A4006352BF /* DailyDuesApp.swift in Sources */,
 				840608D2297F53C3006352BF /* DailyDueRowViewModel.swift in Sources */,
+				848CA0BB299FF252001DFEB8 /* AddDailyDueView.swift in Sources */,
 				84CBF736299AFAF300CA8F20 /* CircularProgressView.swift in Sources */,
 				840608D8298089D3006352BF /* EditDailyDueView.swift in Sources */,
 			);

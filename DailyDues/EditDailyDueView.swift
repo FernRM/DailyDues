@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct EditDailyDueView: View {
-    @ObservedObject var dailyDue: DailyDue
-
     @EnvironmentObject var dataController: DataController
     @Environment(\.presentationMode) var presentationMode
+
+    @ObservedObject var dailyDue: DailyDue
 
     @State private var title: String
     @State private var icon: String
@@ -133,8 +133,6 @@ struct EditDailyDueView: View {
                     showingNotificationsError = true
                     dailyDue.reminderTime = nil
                     remindMe = false
-
-
                 }
             }
         } else {

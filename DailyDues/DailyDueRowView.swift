@@ -16,6 +16,15 @@ struct DailyDueRowView: View {
     @State private var icon: String
     var showingDetailView: Bool
 
+    init(dailyDue: DailyDue, showDetailView: Bool) {
+        let viewModel = ViewModel(dailyDue: dailyDue)
+        _viewModel = StateObject(wrappedValue: viewModel)
+
+        self.dailyDue = dailyDue
+        self.icon = viewModel.icon
+        showingDetailView = showDetailView
+    }
+
     var body: some View {
 
         Group {
@@ -66,15 +75,6 @@ struct DailyDueRowView: View {
 
 
 
-    }
-
-    init(dailyDue: DailyDue, showDetailView: Bool) {
-        let viewModel = ViewModel(dailyDue: dailyDue)
-        _viewModel = StateObject(wrappedValue: viewModel)
-
-        self.dailyDue = dailyDue
-        self.icon = viewModel.icon
-        showingDetailView = showDetailView
     }
 }
 

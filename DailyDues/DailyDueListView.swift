@@ -9,8 +9,11 @@ import SwiftUI
 
 struct DailyDueListView: View {
     @EnvironmentObject var dataController: DataController
+
     @StateObject var viewModel: ViewModel
+
     @State public var showingDetailView = false
+    @State private var showingAddView = false
 
 
     var body: some View {
@@ -42,7 +45,7 @@ struct DailyDueListView: View {
                         Image(systemName: "star")
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .navigationBarLeading) {
 
                     Button {
                         withAnimation {
@@ -53,16 +56,29 @@ struct DailyDueListView: View {
                         Text("Edit")
                     }
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        // code
+                        showingAddView.toggle()
+                    } label: {
+                        Label("Add", systemImage: "plus")
+                    }
+                    .fullScreenCover(isPresented: $showingAddView) {
+                        AddDailyDueView()
+                    }
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            }
         }
+        .navigationViewStyle(.stack)
+    }
 
     init(dataController: DataController) {
         let viewModel = ViewModel(dataController: dataController)
         _viewModel = StateObject(wrappedValue: viewModel)
     }
+
 }
 
 
