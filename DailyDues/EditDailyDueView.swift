@@ -78,7 +78,7 @@ struct EditDailyDueView: View {
                         Alert(
                             title: Text("Ope!"),
                             message: Text("There was a problem! Please check if you have notifications enabled."),
-                            primaryButton: .default(Text("Check Settings"), action: showAppSettings),
+                            primaryButton: .default(Text("Check Settings")),
                             secondaryButton: .cancel()
                         )
                     }

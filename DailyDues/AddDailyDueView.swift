@@ -59,7 +59,7 @@ struct AddDailyDueView: View {
                 }
 
                 Section(header: Text("Daily Due Reminder")) {
-                    Toggle("Show reminders", isOn: $remindMe.animation()) //onChange to run function checking settings
+                    Toggle("Show reminders", isOn: $remindMe.animation().onChange(checkNotificationPermissions))
                         .alert(isPresented: $showingNotificationsError) {
                             Alert(
                                 title: Text("Ope!"),
@@ -81,14 +81,14 @@ struct AddDailyDueView: View {
                     LazyVGrid(columns: iconColumns) {
                         ForEach(DailyDue.icons, id: \.self, content: iconButton)
                     }
-                    .font(.largeTitle)
+                    .font(.title)
                 }
             }
             .navigationTitle("Add Daily Due")
 //            .onDisappear(perform: dataController.save)
-            .onTapGesture {
-                titleInFocus = false
-            }
+//            .onTapGesture {
+//                titleInFocus = false
+//            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
@@ -112,20 +112,18 @@ struct AddDailyDueView: View {
 
     }
 
-//    func checkNotificationPermissions() {
-//        if remindMe {
-//            dataController.checkSettings(completion: remindMe) { success in
-//                if success == false {
-//                    showingNotificationsError = true
-//                    dailyDue.reminderTime = nil
-//                    remindMe = false
-//                }
-//            }
-//        } else {
-//            dailyDue.reminderTime = nil
-//            dataController.removeReminders(for: dailyDue)
-//        }
-//    }
+    func checkNotificationPermissions() {
+
+        if remindMe {
+            dataController.checkSettings { success in
+                if success == false {
+                    showingNotificationsError = true
+                    reminderTime = Date()
+                    remindMe = false
+                }
+            }
+        }
+    }
 
     func colorButton(for item: String) -> some View {
         ZStack {
@@ -186,6 +184,9 @@ struct AddDailyDueView: View {
 
        if remindMe {
            newDailyDue.reminderTime = reminderTime
+           dataController.addReminders(for: newDailyDue) { _ in }
+       } else {
+           newDailyDue.reminderTime = nil
        }
     }
 }
