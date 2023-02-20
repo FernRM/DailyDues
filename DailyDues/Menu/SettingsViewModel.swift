@@ -1,30 +1,30 @@
 //
-//  DailyDueListViewModel.swift
+//  SettingsViewModel.swift
 //  DailyDues
 //
-//  Created by Ricardo Fernandez on 1/24/23.
+//  Created by Ricardo Fernandez on 2/20/23.
 //
 
 import CoreData
 import Foundation
 
-extension DailyDueListView {
+extension SettingsView {
     class ViewModel: NSObject, ObservableObject, NSFetchedResultsControllerDelegate {
-        let dataController: DataController
-
         private let dailyDuesController: NSFetchedResultsController<DailyDue>
+
         @Published var dailyDues = [DailyDue]()
+
+        var dataController: DataController
 
         init(dataController: DataController) {
             self.dataController = dataController
 
-            let request: NSFetchRequest<DailyDue> = DailyDue.fetchRequest()
-            let titleSortDescriptor = NSSortDescriptor(keyPath:\DailyDue.title, ascending: true)
-            let isCompletedSortDescriptor = NSSortDescriptor(keyPath:\DailyDue.isCompleted, ascending: true)
-            request.sortDescriptors = [isCompletedSortDescriptor, titleSortDescriptor]
+            let dailyDueRequest: NSFetchRequest<DailyDue> = DailyDue.fetchRequest()
+            let titleSortDescriptor = NSSortDescriptor(keyPath: \DailyDue.title, ascending: true)
+            dailyDueRequest.sortDescriptors = [titleSortDescriptor]
 
             dailyDuesController = NSFetchedResultsController(
-                fetchRequest: request,
+                fetchRequest: dailyDueRequest,
                 managedObjectContext: dataController.container.viewContext,
                 sectionNameKeyPath: nil,
                 cacheName: nil
@@ -37,7 +37,7 @@ extension DailyDueListView {
                 try dailyDuesController.performFetch()
                 dailyDues = dailyDuesController.fetchedObjects ?? []
             } catch {
-                print("Failed to fetch the Daily Dues!")
+                print("Failed to fetch the Daily Dues for Settings!")
             }
         }
 
@@ -47,11 +47,22 @@ extension DailyDueListView {
             }
         }
 
+        func deleteAllNotificationReminders() {
+            if !dailyDues.isEmpty {
+                for dailyDue in dailyDues {
+                    dataController.removeReminders(for: dailyDue)
+                }
+            }
+        }
+
+        // Deletes all data, including notifications
         func deleteAllData() {
+            deleteAllNotificationReminders()
             dataController.objectWillChange.send()
             dataController.deleteAll()
         }
 
+        // TODO: Remove when Settings are complete
         func addSampleData() {
             dataController.deleteAll()
             try? dataController.createSampleData()

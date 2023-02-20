@@ -73,19 +73,19 @@ struct AddDailyDueView: View {
                         DatePicker(
                             "Reminder time",
                             selection: $reminderTime,
-                            displayedComponents: .hourAndMinute)
+                            displayedComponents: .hourAndMinute
+                        )
                     }
                 }
 
-                Section(header: Text("Icon")) {
-                    LazyVGrid(columns: iconColumns) {
-                        ForEach(DailyDue.icons, id: \.self, content: iconButton)
-                    }
-                    .font(.title)
-                }
+//                Section(header: Text("Icon")) {
+//                    LazyVGrid(columns: iconColumns) {
+//                        ForEach(DailyDue.icons, id: \.self, content: iconButton)
+//                    }
+//                    .font(.title)
+//                }
             }
             .navigationTitle("Add Daily Due")
-//            .onDisappear(perform: dataController.save)
 //            .onTapGesture {
 //                titleInFocus = false
 //            }
@@ -100,6 +100,7 @@ struct AddDailyDueView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         createNewDailyDue()
+                        dataController.save()
                         dismiss()
                     } label: {
                         Text("Save")

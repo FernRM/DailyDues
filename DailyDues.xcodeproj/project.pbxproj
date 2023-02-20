@@ -22,6 +22,10 @@
 		840608D8298089D3006352BF /* EditDailyDueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D7298089D3006352BF /* EditDailyDueView.swift */; };
 		840608DA298093BE006352BF /* Binding-OnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840608D9298093BE006352BF /* Binding-OnChange.swift */; };
 		848CA0BB299FF252001DFEB8 /* AddDailyDueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CA0BA299FF252001DFEB8 /* AddDailyDueView.swift */; };
+		848CA0BF29A3E4F3001DFEB8 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CA0BE29A3E4F3001DFEB8 /* SettingsView.swift */; };
+		848CA0C129A3E6E7001DFEB8 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CA0C029A3E6E7001DFEB8 /* SettingsViewModel.swift */; };
+		848CA0C329A3F3EC001DFEB8 /* DailyDueEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CA0C229A3F3EC001DFEB8 /* DailyDueEditRowView.swift */; };
+		848CA0C529A3F49B001DFEB8 /* DailyDueEditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848CA0C429A3F49B001DFEB8 /* DailyDueEditListView.swift */; };
 		84CBF736299AFAF300CA8F20 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84CBF735299AFAF300CA8F20 /* CircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +48,10 @@
 		840608D7298089D3006352BF /* EditDailyDueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDailyDueView.swift; sourceTree = "<group>"; };
 		840608D9298093BE006352BF /* Binding-OnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding-OnChange.swift"; sourceTree = "<group>"; };
 		848CA0BA299FF252001DFEB8 /* AddDailyDueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDailyDueView.swift; sourceTree = "<group>"; };
+		848CA0BE29A3E4F3001DFEB8 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		848CA0C029A3E6E7001DFEB8 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		848CA0C229A3F3EC001DFEB8 /* DailyDueEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDueEditRowView.swift; sourceTree = "<group>"; };
+		848CA0C429A3F49B001DFEB8 /* DailyDueEditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDueEditListView.swift; sourceTree = "<group>"; };
 		84CBF735299AFAF300CA8F20 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,17 +85,13 @@
 		840608B4297F08A4006352BF /* DailyDues */ = {
 			isa = PBXGroup;
 			children = (
+				848CA0BD29A3E194001DFEB8 /* Menu */,
+				848CA0BC29A3E14C001DFEB8 /* Home */,
 				840608CA297F24F2006352BF /* Extensions */,
 				840608C4297F0AFA006352BF /* DailyDues.entitlements */,
 				840608C3297F0AF0006352BF /* Info.plist */,
 				840608B5297F08A4006352BF /* DailyDuesApp.swift */,
 				840608B7297F08A4006352BF /* ContentView.swift */,
-				848CA0BA299FF252001DFEB8 /* AddDailyDueView.swift */,
-				840608D7298089D3006352BF /* EditDailyDueView.swift */,
-				840608D529803213006352BF /* DailyDueListView.swift */,
-				840608D329802BA6006352BF /* DailyDueListViewModel.swift */,
-				840608CF297F537E006352BF /* DailyDueRowView.swift */,
-				840608D1297F53C3006352BF /* DailyDueRowViewModel.swift */,
 				840608C5297F0BB5006352BF /* DataController.swift */,
 				840608C7297F0DDF006352BF /* Main.xcdatamodeld */,
 				840608B9297F08A5006352BF /* Assets.xcassets */,
@@ -113,6 +117,30 @@
 				84CBF735299AFAF300CA8F20 /* CircularProgressView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		848CA0BC29A3E14C001DFEB8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				840608D529803213006352BF /* DailyDueListView.swift */,
+				840608D329802BA6006352BF /* DailyDueListViewModel.swift */,
+				840608CF297F537E006352BF /* DailyDueRowView.swift */,
+				840608D1297F53C3006352BF /* DailyDueRowViewModel.swift */,
+				848CA0BA299FF252001DFEB8 /* AddDailyDueView.swift */,
+				840608D7298089D3006352BF /* EditDailyDueView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		848CA0BD29A3E194001DFEB8 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				848CA0BE29A3E4F3001DFEB8 /* SettingsView.swift */,
+				848CA0C029A3E6E7001DFEB8 /* SettingsViewModel.swift */,
+				848CA0C429A3F49B001DFEB8 /* DailyDueEditListView.swift */,
+				848CA0C229A3F3EC001DFEB8 /* DailyDueEditRowView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,13 +219,17 @@
 				840608D0297F537E006352BF /* DailyDueRowView.swift in Sources */,
 				840608CC297F2509006352BF /* DailyDue-CoreDataHelpers.swift in Sources */,
 				840608B8297F08A4006352BF /* ContentView.swift in Sources */,
+				848CA0C129A3E6E7001DFEB8 /* SettingsViewModel.swift in Sources */,
 				840608C6297F0BB5006352BF /* DataController.swift in Sources */,
 				840608DA298093BE006352BF /* Binding-OnChange.swift in Sources */,
+				848CA0BF29A3E4F3001DFEB8 /* SettingsView.swift in Sources */,
 				840608C9297F0DDF006352BF /* Main.xcdatamodeld in Sources */,
 				840608B6297F08A4006352BF /* DailyDuesApp.swift in Sources */,
 				840608D2297F53C3006352BF /* DailyDueRowViewModel.swift in Sources */,
 				848CA0BB299FF252001DFEB8 /* AddDailyDueView.swift in Sources */,
 				84CBF736299AFAF300CA8F20 /* CircularProgressView.swift in Sources */,
+				848CA0C529A3F49B001DFEB8 /* DailyDueEditListView.swift in Sources */,
+				848CA0C329A3F3EC001DFEB8 /* DailyDueEditRowView.swift in Sources */,
 				840608D8298089D3006352BF /* EditDailyDueView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

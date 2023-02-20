@@ -12,9 +12,7 @@ struct DailyDueListView: View {
 
     @StateObject var viewModel: ViewModel
 
-    @State public var showingDetailView = false
     @State private var showingAddView = false
-
 
     var body: some View {
         NavigationView {
@@ -22,7 +20,7 @@ struct DailyDueListView: View {
 
                 VStack( spacing: 0) {
                     ForEach(viewModel.dailyDues) { dailyDue in
-                        DailyDueRowView(dailyDue: dailyDue, showDetailView: showingDetailView)
+                        DailyDueRowView(dailyDue: dailyDue)
                     }
                     .padding([.horizontal, .bottom], 15)
                 }
@@ -32,30 +30,17 @@ struct DailyDueListView: View {
             .navigationTitle("Daily Dues")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        viewModel.deleteAllData()
-                    } label: {
-                        Image(systemName: "trash")
+                    NavigationLink(destination: SettingsView(dataController: dataController)) {
+                        Label("Settings", systemImage: "gear")
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        viewModel.addSampleData()
-                    } label: {
-                        Image(systemName: "star")
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-
-                    Button {
-                        withAnimation {
-                            showingDetailView.toggle()
-                        }
-                        print("View toggled")
-                    } label: {
-                        Text("Edit")
-                    }
-                }
+//                ToolbarItem(placement: .navigationBarLeading) {
+//                    Button {
+//                        viewModel.addSampleData()
+//                    } label: {
+//                        Image(systemName: "star")
+//                    }
+//                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         // code

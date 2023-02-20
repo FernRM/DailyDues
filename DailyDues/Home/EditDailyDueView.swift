@@ -87,35 +87,36 @@ struct EditDailyDueView: View {
                     DatePicker(
                         "Reminder time",
                         selection: $reminderTime.onChange(update),
-                        displayedComponents: .hourAndMinute)
+                        displayedComponents: .hourAndMinute
+                    )
                 }
             }
 
-            Section(header: Text("Icon")) {
-                LazyVGrid(columns: iconColumns) {
-                    ForEach(DailyDue.icons, id: \.self, content: iconButton)
-                }
-                .font(.largeTitle)
-            }
+//            Section(header: Text("Icon")) {
+//                LazyVGrid(columns: iconColumns) {
+//                    ForEach(DailyDue.icons, id: \.self, content: iconButton)
+//                }
+//                .font(.largeTitle)
+//            }
 
             Button("Delete Daily Due") {
                 showingDeleteConfirm.toggle()
                 dataController.delete(dailyDue)
             }
             .accentColor(.red)
-            .alert(isPresented: $showingDeleteConfirm) {
-                Alert(
-                    title: Text("Delete Daily Due"),
-                    message: Text("Are you sure you want to delete this?"),
-                    primaryButton: .default(Text("Delete"), action: delete),
-                    secondaryButton: .cancel()
-                )
-            }
+
 
         }
         .navigationTitle("Details")
         .onDisappear(perform: dataController.save)
-
+        .alert(isPresented: $showingDeleteConfirm) {
+            Alert(
+                title: Text("Delete Daily Due"),
+                message: Text("Are you sure you want to delete this?"),
+                primaryButton: .default(Text("Delete"), action: delete),
+                secondaryButton: .cancel()
+            )
+        }
     }
 
     func update() {
