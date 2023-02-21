@@ -101,6 +101,7 @@ struct EditDailyDueView: View {
 
             Button("Delete Daily Due") {
                 showingDeleteConfirm.toggle()
+                dataController.removeReminders(for: dailyDue)
                 dataController.delete(dailyDue)
             }
             .accentColor(.red)
