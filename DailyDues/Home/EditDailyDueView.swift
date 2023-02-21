@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditDailyDueView: View {
     @EnvironmentObject var dataController: DataController
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
 
     @ObservedObject var dailyDue: DailyDue
 
@@ -64,7 +64,7 @@ struct EditDailyDueView: View {
                         }
                     }
                 }
-            } 
+            }
 
             Section(header: Text("Color")) {
                 LazyVGrid(columns: colorColumns) {
@@ -78,14 +78,14 @@ struct EditDailyDueView: View {
                         Alert(
                             title: Text("Ope!"),
                             message: Text("There was a problem! Please check if you have notifications enabled."),
-                            primaryButton: .default(Text("Check Settings")),
+                            primaryButton: .default(Text("Check Settings"), action: showAppSettings),
                             secondaryButton: .cancel()
                         )
                     }
 
                 if remindMe {
                     DatePicker(
-                        "Reminder time",
+                        "Reminder Time",
                         selection: $reminderTime.onChange(update),
                         displayedComponents: .hourAndMinute
                     )
@@ -144,7 +144,7 @@ struct EditDailyDueView: View {
 
     func delete() {
         dataController.delete(dailyDue)
-        presentationMode.wrappedValue.dismiss()
+        dismiss()
     }
 
     func colorButton(for item: String) -> some View {

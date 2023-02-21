@@ -56,7 +56,7 @@ extension DailyDue {
     }
 
     var dailyDueTitle: String {
-        title ?? "New Task"
+        title ?? NSLocalizedString("New Task", comment: "Create a new daily due")
     }
 
     var dailyDueCreationDate: Date {

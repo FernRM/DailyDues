@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddDailyDueView: View {
     @EnvironmentObject var dataController: DataController
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     @Environment(\.dismiss) var dismiss
 
     @State private var title: String = ""
@@ -22,8 +22,6 @@ struct AddDailyDueView: View {
     @State private var showingDeleteConfirm = false
     @State private var showingNotificationsError = false
     @FocusState private var titleInFocus: Bool
-
-
 
     let colorColumns = [
         GridItem(.adaptive(minimum: 44))
@@ -71,7 +69,7 @@ struct AddDailyDueView: View {
 
                     if remindMe {
                         DatePicker(
-                            "Reminder time",
+                            "Reminder Time",
                             selection: $reminderTime,
                             displayedComponents: .hourAndMinute
                         )
@@ -85,7 +83,7 @@ struct AddDailyDueView: View {
 //                    .font(.title)
 //                }
             }
-            .navigationTitle("Add Daily Due")
+            .navigationTitle("New Daily Due")
 //            .onTapGesture {
 //                titleInFocus = false
 //            }

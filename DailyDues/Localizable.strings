@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  DailyDues
+
+  Created by Ricardo Fernandez on 2/21/23.
+  
+*/
+
+"New Task" = "New Task";
+
+/* Main View */
+"Daily Dues" = "Daily Dues";
+"Settings" = "Settings";
+"Add" = "Add";
+
+/* DailyDueRowView*/
+"%lld / %lld" = "%lld / %lld"; // For "repetitionsCompleted / repetitionsPerDay"
+
+/* AddDailyDueView */
+"Cancel" = "Cancel";
+"Save" = "Save";
+"New Daily Due" = "New Daily Due";
+"Title" = "Title";
+"Repetitions per day" = "Repetitions per day";
+"Color" = "Color";
+
+"Daily Due Reminder" = "Daily Due Reminder";
+"Show reminders" = "Show reminders";
+"Reminder Time" = "Reminder Time";
+
+/* SettingsView */
+"Clear All Notification Reminders" = "Clear All Notification Reminders";
+"Reset All Daily Dues" = "Reset All Daily Dues";
+"Delete All Daily Dues" = "Delete All Daily Dues";
+
+/* EditListView */
+"Edit Daily Dues" = "Edit Daily Dues";
+
+/* EditView */
+"Details" = "Details";
+
