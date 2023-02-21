@@ -35,7 +35,7 @@ struct AddDailyDueView: View {
 
         NavigationView {
             Form {
-                Section(header: Text("Title")) {
+                Section(header: Text("Title").foregroundColor(Color(color))) {
                     TextField("Title", text: $title)
                         .focused($titleInFocus)
                 }
@@ -50,13 +50,13 @@ struct AddDailyDueView: View {
                     }
                 }
 
-                Section(header: Text("Color")) {
+                Section(header: Text("Color").foregroundColor(Color(color))) {
                     LazyVGrid(columns: colorColumns) {
                         ForEach(DailyDue.colors, id: \.self, content: colorButton)
                     }
                 }
 
-                Section(header: Text("Daily Due Reminder")) {
+                Section(header: Text("Daily Due Reminder").foregroundColor(Color(color))) {
                     Toggle("Show reminders", isOn: $remindMe.animation().onChange(checkNotificationPermissions))
                         .alert(isPresented: $showingNotificationsError) {
                             Alert(

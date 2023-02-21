@@ -21,6 +21,7 @@ struct DailyDueEditListView: View {
             }
             .navigationTitle("Edit Daily Dues")
         }
+        .background(.regularMaterial, ignoresSafeAreaEdges: .all)
     }
 }
 

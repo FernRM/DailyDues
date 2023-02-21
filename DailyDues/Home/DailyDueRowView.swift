@@ -45,9 +45,9 @@ struct DailyDueRowView: View {
             }
             .accessibilityElement(children: .combine)
             .padding()
-            .background(Color.white)
+            .background(Color(UIColor.systemBackground))
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            .shadow(color: .black.opacity(0.05), radius: 5, x: 5, y: 5)
+            .shadow(color: .primary.opacity(0.05), radius: 3, x: 5, y: 5)
     }
 }
 
