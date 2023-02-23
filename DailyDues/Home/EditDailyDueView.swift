@@ -83,10 +83,11 @@ struct EditDailyDueView: View {
                         )
                     }
 
+
                 if remindMe {
                     DatePicker(
                         "Reminder Time",
-                        selection: $reminderTime.onChange(update),
+                        selection: $reminderTime,
                         displayedComponents: .hourAndMinute
                     )
                 }
@@ -98,26 +99,26 @@ struct EditDailyDueView: View {
 //                }
 //                .font(.largeTitle)
 //            }
-
-            Button("Delete Daily Due") {
-                showingDeleteConfirm.toggle()
-                dataController.removeReminders(for: dailyDue)
-                dataController.delete(dailyDue)
+            Section {
+                Button("Delete Daily Due") {
+                    showingDeleteConfirm.toggle()
+                    dataController.removeReminders(for: dailyDue)
+                    dataController.delete(dailyDue)
+                }
+                .accentColor(.red)
             }
-            .accentColor(.red)
-
 
         }
-        .navigationTitle("Details")
-        .onDisappear(perform: dataController.save)
         .alert(isPresented: $showingDeleteConfirm) {
             Alert(
                 title: Text("Delete Daily Due"),
                 message: Text("Are you sure you want to delete this?"),
-                primaryButton: .default(Text("Delete"), action: delete),
+                primaryButton: .destructive(Text("Delete"), action: delete),
                 secondaryButton: .cancel()
             )
         }
+        .navigationTitle("Details")
+        .onDisappear(perform: dataController.save)
     }
 
     func update() {

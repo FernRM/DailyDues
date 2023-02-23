@@ -84,9 +84,6 @@ struct AddDailyDueView: View {
 //                }
             }
             .navigationTitle("New Daily Due")
-//            .onTapGesture {
-//                titleInFocus = false
-//            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {

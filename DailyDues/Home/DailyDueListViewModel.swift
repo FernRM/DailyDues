@@ -39,6 +39,8 @@ extension DailyDueListView {
             } catch {
                 print("Failed to fetch the Daily Dues for the main list view!")
             }
+
+            NotificationCenter.default.addObserver(self, selector: #selector(updateForNewDay), name: .NSCalendarDayChanged, object: nil)
         }
 
         func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -47,16 +49,15 @@ extension DailyDueListView {
             }
         }
 
-        // TODO: Remove when Settings are complete
-        func deleteAllData() {
-            dataController.objectWillChange.send()
-            dataController.deleteAll()
-        }
+        @objc func updateForNewDay() {
+            guard dailyDues != [] else { return }
 
-        // TODO: Remove when Settings are complete
-        func addSampleData() {
-            dataController.deleteAll()
-            try? dataController.createSampleData()
+            for dailyDue in dailyDues {
+                dailyDue.repetitionsCompleted = 0
+                dailyDue.isCompleted = false
+                // redundant from computed DailyDueIsCompleted in Core Data helpers,
+                // leaving for now until I determine which is best to continue with
+            }
         }
     }
 }

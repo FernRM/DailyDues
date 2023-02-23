@@ -83,7 +83,7 @@ extension DailyDue {
         dailyDue.title = "Drink full water bottle"
         dailyDue.repetitionsPerDay = 4
         dailyDue.repetitionsCompleted = 2
-        dailyDue.isCompleted = false
+        dailyDue.isCompleted = true
         dailyDue.creationDate = Date() - 5
 
         return dailyDue

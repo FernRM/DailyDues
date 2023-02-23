@@ -24,19 +24,22 @@ struct DailyDueRowView: View {
     }
 
     var body: some View {
-            VStack (alignment: .leading) {
+            VStack (alignment: .leading, spacing: 5) {
                 HStack {
                     Text(dailyDue.dailyDueTitle)
                         .font(.title3)
                         .fontWeight(.medium)
                     Spacer()
+
                     Text("\(dailyDue.repetitionsCompleted) / \(dailyDue.repetitionsPerDay)")
                         .font(.body)
                 }
+//                .padding(.bottom, 0)
 
                 ProgressView(value: dailyDue.dailyDueCompletionAmount)
                     .accentColor(Color(dailyDue.dailyDueColor))
                     .background(Color(dailyDue.dailyDueColor).opacity(0.2))
+//                    .padding(.top, 0)
             }
             .onTapGesture {
                 withAnimation {
