@@ -62,6 +62,15 @@ extension SettingsView {
             dataController.deleteAll()
         }
 
+        func resetAllDailyDues() {
+            if !dailyDues.isEmpty {
+                for dailyDue in dailyDues {
+                    dailyDue.isCompleted = false
+                    dailyDue.repetitionsCompleted = 0
+                }
+            }
+        }
+
         // TODO: Remove when Settings are complete
         func addSampleData() {
             dataController.deleteAll()

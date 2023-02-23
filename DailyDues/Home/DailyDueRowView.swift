@@ -24,6 +24,10 @@ struct DailyDueRowView: View {
     }
 
     var body: some View {
+//        HStack {
+//            Image(systemName: dailyDue.dailyDueIcon)
+//                .font(.title2)
+//                .foregroundColor(Color(dailyDue.dailyDueColor))
             VStack (alignment: .leading, spacing: 5) {
                 HStack {
                     Text(dailyDue.dailyDueTitle)
@@ -34,22 +38,23 @@ struct DailyDueRowView: View {
                     Text("\(dailyDue.repetitionsCompleted) / \(dailyDue.repetitionsPerDay)")
                         .font(.body)
                 }
-//                .padding(.bottom, 0)
+                //                .padding(.bottom, 0)
 
                 ProgressView(value: dailyDue.dailyDueCompletionAmount)
                     .accentColor(Color(dailyDue.dailyDueColor))
                     .background(Color(dailyDue.dailyDueColor).opacity(0.2))
-//                    .padding(.top, 0)
+                //                    .padding(.top, 0)
             }
-            .onTapGesture {
-                withAnimation {
-                    viewModel.addRepetition(dailyDue: dailyDue)
+//        }
+                .onTapGesture {
+                    withAnimation {
+                        viewModel.addRepetition(dailyDue: dailyDue)
+                    }
                 }
-            }
-            .accessibilityElement(children: .combine)
-            .padding()
-            .background(Color(UIColor.systemBackground))
-            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .accessibilityElement(children: .combine)
+                .padding()
+                .background(Color(UIColor.systemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             .shadow(color: .primary.opacity(0.05), radius: 3, x: 5, y: 5)
     }
 }

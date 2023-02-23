@@ -22,11 +22,12 @@ struct DailyDueListView: View {
                     ForEach(viewModel.dailyDues) { dailyDue in
                         DailyDueRowView(dailyDue: dailyDue)
                     }
+                    .animation(.easeIn(duration: 1), value: viewModel.dailyDues)
                     .padding([.horizontal, .bottom], 15)
                 }
 
             }
-            .background(.regularMaterial, ignoresSafeAreaEdges: .all)
+            .background(.ultraThinMaterial, ignoresSafeAreaEdges: .all)
             .navigationTitle("Daily Dues")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

@@ -32,6 +32,7 @@ struct SettingsView: View {
             Section {
                 Button ("Reset All Daily Dues") {
                     // TODO: Decide exactly what this resets
+                    viewModel.resetAllDailyDues()
                 }
                 Button ("Delete All Daily Dues") {
                     viewModel.deleteAllData()
