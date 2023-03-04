@@ -10,5 +10,10 @@
         <attribute name="repetitionsCompleted" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="repetitionsPerDay" optional="YES" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="weekdays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Weekday" inverseName="dailyDues" inverseEntity="Weekday"/>
+    </entity>
+    <entity name="Weekday" representedClassName="Weekday" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="dailyDues" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DailyDue" inverseName="weekdays" inverseEntity="DailyDue"/>
     </entity>
 </model>

@@ -47,7 +47,7 @@ struct DailyDueRowView: View {
             }
 //        }
                 .onTapGesture {
-                    withAnimation {
+                    withAnimation(.easeIn(duration: 0.8)) {
                         viewModel.addRepetition(dailyDue: dailyDue)
                     }
                 }
